@@ -1,0 +1,203 @@
+  
+//StockTable
+protected string M_str_sql = " select   cast(0   as   bit)   as   0复选框,SN as 1序号,StockID as 2进货单号,WareID as 3品号,WareName as 4品名,"
+             + "Spec as 5 规格,Unit as 6 单位,PurOrdersID as 7 采购单号,PurOrdersSN as 8 采购单序号,PCount as 9采购数量,StockCount as 10 进货数量,CheckCount as 11 验收数量,PUnitPrice as 12 采购单价,"
+             + "TaxRate as 13 税率,TotalCount as 14 金额,NoTax as 15 不含税额,Tax as 16 税额,TNTotalCount as 17 合计金额,TNTax as 18 合计税额,TNNoTax as 19 合计不含税额,StokerID as 20 供运商编号,"
+             + "StokerName as 21 供运商名称,Pur as 22 采购员,Acceptor as 23 验收人,StorageType as 24 仓库类型,LocationName as 25 库位名称,StockDate as 26 进货日期,Maker as 27 制单人,"
+             + "Date as 28 制单日期, Time as 29 制单时间 from tb_StockTable";
+//PurOrdersT
+  #region total1
+        private DataTable total1()
+        {
+            dt = new DataTable();
+            dt.Columns.Add("0序号", typeof(string));
+            dt.Columns.Add("1品号", typeof(string));
+            dt.Columns.Add("2品名", typeof(string));
+            dt.Columns.Add("3规格", typeof(string));
+            dt.Columns.Add("4单位", typeof(string));
+            dt.Columns.Add("5采购数量", typeof(decimal ));
+            dt.Columns.Add("6采购单价", typeof(decimal));
+            dt.Columns.Add("7采购未结数量", typeof(decimal),"采购数量");
+            dt.Columns.Add("8税率", typeof(decimal));
+            dt.Columns.Add("9金额", typeof(decimal), "采购数量*采购单价");
+            dt.Columns.Add("10税额", typeof(decimal), "金额*0.17");
+            dt.Columns.Add("11不含税额", typeof(decimal), "金额-税额");
+            dt.Columns.Add("12合计金额", typeof(decimal));
+            dt.Columns.Add("13合计税额", typeof(decimal));
+            dt.Columns.Add("14合计不含税金额", typeof(decimal));
+            dt.Columns.Add("15供运商编号", typeof(string));
+            dt.Columns.Add("16供运商名称", typeof(string));
+            dt.Columns.Add("17采购日期", typeof(DateTime));
+            dt.Columns.Add("18采购员", typeof(string));
+            dt.Columns.Add("19状态栏", typeof(char));
+            dt.Columns.Add("20制单人", typeof(char));
+            dt.Columns.Add("21制单日期", typeof(DateTime));
+            dt.Columns.Add("22制单时间", typeof(string));
+            return dt;
+        }
+        #endregion
+//PurOrders
+  protected string M_str_sql = "  select   cast(0   as   bit)   as   0复选框, SN as 1序号,PurOrdersID as 2采购单号,WareID as 3 品号,WareName as 4 品名,Spec as 5 规格,Unit as 6 单位,"
+            + "PCount as 7 采购数量,PUnitPrice as 8 采购单价,USCount as 9 采购单未结数量,TaxRate as 10 税率,TotalCount as 11 金额,NoTax as 12 不含税额,Tax as 13 税额,TNTotalCount as 14 合计金额,"
+            +"TNTax as 15 合计税额,TNNoTax as 16 合计不含税金额,StokerID as 17 供运商编号,StokerName as 18 供运商名称,PDate as 19 采购日期,Pur as 20 采购员,"
+            + "Maker as 21 制单人,Date as 22 制单日期, Time as 23 制单时间 from tb_PurOrders";
+//ReturnT
+   #region total1
+        private DataTable total1()
+        {
+            dt = new DataTable();
+            dt.Columns.Add("0序号", typeof(string));
+            dt.Columns.Add("1品号", typeof(string));
+            dt.Columns.Add("2品名", typeof(string));
+            dt.Columns.Add("3规格", typeof(string));
+            dt.Columns.Add("4单位", typeof(string));
+            dt.Columns.Add("5采购单号", typeof(string));
+            dt.Columns.Add("6采购序号", typeof(string));
+            dt.Columns.Add("7进货单号", typeof(string));
+            dt.Columns.Add("8进货验收数量", typeof(string));
+            dt.Columns.Add("9退货数量", typeof(decimal ));
+            dt.Columns.Add("10采购单价", typeof(decimal));
+            dt.Columns.Add("11税率", typeof(decimal));
+            dt.Columns.Add("12金额", typeof(decimal), "退货数量*采购单价");
+            dt.Columns.Add("13税额", typeof(decimal), "金额*0.17");
+            dt.Columns.Add("14不含税额", typeof(decimal), "金额-税额");
+            dt.Columns.Add("15合计金额", typeof(decimal));
+            dt.Columns.Add("16合计税额", typeof(decimal));
+            dt.Columns.Add("17合计不含税金额", typeof(decimal));
+            dt.Columns.Add("18仓库类型", typeof(string));
+            dt.Columns.Add("19库位名称", typeof(string));
+            dt.Columns.Add("20供运商编号", typeof(string));
+            dt.Columns.Add("21供运商名称", typeof(string));
+            dt.Columns.Add("22退货日期", typeof(DateTime));
+            dt.Columns.Add("23制单人", typeof(char));
+            dt.Columns.Add("24制单日期", typeof(DateTime)); 
+            dt.Columns.Add("25制单时间", typeof(string));
+            return dt;
+        }
+        #endregion
+//Return
+  protected string M_str_sql = "select SN as 0 序号,ReturnID as 1 退货单号,WareID as 2 品号,WareName as 3 品名,Spec as 4 规格,Unit as 5 单位,"
+            +"PurOrdersID as 6 采购单号,PurOrdersSN as 7 采购单序号,StockID as 8 进货单号,SCheckCount as 9 进货验收数量,ReCount as 10 退货数量,PUnitPrice as 11 采购单价,TaxRate as 12 税率,TotalCount as 13 金额,"
+            + "NoTax as 14不含税额,Tax as 15 税额,TNTotalCount as 16 合计金额,TNTax as 17 合计税额,TNNoTax as 18 合计不含税金额,StorageType as 19 仓库类型,"
+            +"LocationName as 20 库位名称,StokerID as 21 供运商编号,StokerName as 22 供运商名称, ReDate as 23 退货日期,Pur as 24采购员,Maker as 25制单人, Date as 26 制单日期,"
+            +"Time as 制单时间 from tb_Return";
+//OrdersT
+  #region total1
+        private DataTable total1()
+        {  
+            dt = new DataTable();
+            dt.Columns.Add ("0序号",typeof (string ));
+            dt.Columns.Add("1品号", typeof(string));
+            dt.Columns.Add("2品名", typeof(string));
+            dt.Columns.Add("3规格", typeof(string));
+            dt.Columns.Add("4单位", typeof(string));
+            dt.Columns.Add("5订单数量", typeof(decimal));
+            dt.Columns.Add("6销售单价", typeof(decimal));
+            dt.Columns.Add("7折扣率", typeof(decimal));
+            dt.Columns.Add("8订单未结数量", typeof(decimal), "订单数量");
+            dt.Columns.Add("9税率", typeof(decimal));
+            dt.Columns.Add("10金额", typeof(decimal), "订单数量*销售单价*折扣率");
+            dt.Columns.Add("11税额", typeof(decimal), "金额*0.17");
+            dt.Columns.Add("12不含税额", typeof(decimal), "金额-税额");
+            dt.Columns.Add("13合计金额", typeof(decimal));
+            dt.Columns.Add("14合计税额", typeof(decimal));
+            dt.Columns.Add("15合计不含税金额", typeof(decimal));
+            dt.Columns.Add("16客户编号", typeof(string));
+            dt.Columns.Add("17客户名称", typeof(string));
+            dt.Columns.Add("18预交货日期", typeof(DateTime));
+            dt.Columns.Add("19实际交货日期", typeof(DateTime));
+            dt.Columns.Add("20业务员", typeof(string));
+            dt.Columns.Add("21状态栏", typeof(char));
+            dt.Columns.Add("22制单人", typeof(char));
+            dt.Columns.Add("23制单日期", typeof(DateTime));
+            dt.Columns.Add("24制单时间", typeof(string));
+            return dt;
+        }
+        #endregion
+//Orders
+   protected string M_str_sql = "select cast(0   as   bit)   as   0 复选框,SN as 1 序号,OrdersID as 2 订单号,WareID as 3 品号,WareName as 4 品名,Spec as 5 规格,Unit as 6 单位,"
+           + "OCount as 7 订单数量 ,SUnitPrice as 8 销售单价 ,DiscountRate as 9 折扣率,USCount as 10 订单未结数量,TaxRate as 11 税率,TotalCount as 12 金额,Tax as 13 税额,"
+           + "NoTax as 14 不含税额,TNTotalCount as 15 合计金额,TNTax as 16 合计税额,TNNoTax as 17 合计不含税金额,ClientID as 18 客户编号,CName as 19 客户名称,OEDD as 20 预交货日期,ORDD as 21 实际交货日期,Sale as 22 业务员,"
+           + "Maker as 23 制单人,Date as 24 制单日期,Time as 25 制单时间 from tb_Orders";
+
+//SellTableT
+ private DataTable total1()
+        {
+            dt = new DataTable();
+            dt.Columns.Add("0序号", typeof(string));
+            dt.Columns.Add("1 品号", typeof(string));
+            dt.Columns.Add("2品名", typeof(string));
+            dt.Columns.Add("3规格", typeof(string));
+            dt.Columns.Add("4单位", typeof(string));
+            dt.Columns.Add("5订单号", typeof(string));
+            dt.Columns.Add("6订单序号", typeof(string));
+            dt.Columns.Add("7订单数量", typeof(string));
+            dt.Columns.Add("8订单未结数量", typeof(string));
+            dt.Columns.Add("9销货数量", typeof(decimal));
+            dt.Columns.Add("10销售单价", typeof(decimal));
+            dt.Columns.Add("11折扣率", typeof(decimal));
+            dt.Columns.Add("12税率", typeof(decimal));
+            dt.Columns.Add("13金额", typeof(decimal), "销货数量*销售单价*折扣率");
+            dt.Columns.Add("14税额", typeof(decimal), "金额*0.17");
+            dt.Columns.Add("15不含税额", typeof(decimal), "金额-税额");
+            dt.Columns.Add("16合计金额", typeof(decimal));
+            dt.Columns.Add("17合计税额", typeof(decimal));
+            dt.Columns.Add("18合计不含税金额", typeof(decimal));
+            dt.Columns.Add("19仓库类型", typeof(string));
+            dt.Columns.Add("20库位名称", typeof(string));
+            dt.Columns.Add("21客户编号", typeof(string));
+            dt.Columns.Add("22客户名称", typeof(string));
+            dt.Columns.Add("23销货日期", typeof(DateTime));
+            dt.Columns.Add("24制单人", typeof(char));
+            dt.Columns.Add("25制单日期", typeof(DateTime));
+            dt.Columns.Add("26制单时间", typeof(string));
+            return dt;
+        }
+//SellTable
+   protected string M_str_sql = "select   cast(0   as   bit)   as   0 复选框, SN as 1 序号,SellID as 2 销货单号,WareID as 3 品号,WareName as 4 品名,Spec as 5 规格,"
+            +"Unit as 6 单位,OrdersID as 7 订单号,OrdersSN as 8 订单序号,OCount as 9 订单数量,SellCount as 10 销货数量,SUnitPrice as 11 销售单价,DiscountRate as 12 折扣率,"
+            + "TaxRate as 13 税率,TotalCount as 14 金额,Tax as 15 税额,NoTax as 16 不含税额,TNTotalCount as 17 合计金额,TNTax as 18 合计税额,TNNoTax as 19 合计不含税金额,"
+            +"StorageType as 20 仓库类型,LocationName as 21 库位名称,ClientID as 22 客户编号,CName as 23 客户名称,Sale as 24 业务员,SellDate as 25 销货日期,Maker as 26 制单人,"
+            +"Date as 27 制单日期,Time as 28 制单时间 from tb_SellTable";
+//SellReT
+    #region total1
+        private DataTable total1()
+        {
+            dt = new DataTable();
+            dt.Columns.Add("0序号", typeof(string));
+            dt.Columns.Add("1品号", typeof(string));
+            dt.Columns.Add("2品名", typeof(string));
+            dt.Columns.Add("3规格", typeof(string));
+            dt.Columns.Add("4单位", typeof(string));
+            dt.Columns.Add("5订单号", typeof(string));
+            dt.Columns.Add("6订单序号", typeof(string));
+            dt.Columns.Add("7订单数量", typeof(string));
+            dt.Columns.Add("8销货单号", typeof(string));
+            dt.Columns.Add("9销货数量", typeof(string));
+            dt.Columns.Add("10销退数量", typeof(decimal));
+            dt.Columns.Add("11销售单价", typeof(decimal));
+            dt.Columns.Add("12折扣率", typeof(decimal));
+            dt.Columns.Add("13税率", typeof(decimal));
+            dt.Columns.Add("14金额", typeof(decimal), "销退数量*销售单价*折扣率");
+            dt.Columns.Add("15税额", typeof(decimal), "金额*0.17");
+            dt.Columns.Add("16不含税额", typeof(decimal), "金额-税额");
+            dt.Columns.Add("17合计金额", typeof(decimal));
+            dt.Columns.Add("18合计税额", typeof(decimal));
+            dt.Columns.Add("19合计不含税金额", typeof(decimal));
+            dt.Columns.Add("20仓库类型", typeof(string));
+            dt.Columns.Add("21库位名称", typeof(string));
+            dt.Columns.Add("22客户编号", typeof(string));
+            dt.Columns.Add("23客户名称", typeof(string));
+            dt.Columns.Add("24销货日期", typeof(DateTime));
+            dt.Columns.Add("25制单人", typeof(char));
+            dt.Columns.Add("26制单日期", typeof(DateTime));
+            dt.Columns.Add("27制单时间", typeof(string));
+            return dt;
+        }
+        #endregion
+//SellRe
+     protected string M_str_sql = "select SN as 0 序号,SellReID as 1 销退单号,WareID as 2 品号,WareName as 3 品名,Spec as 4 规格,"
+            + "Unit as 5 单位,OrdersID as 6 订单号,OrdersSN 7 订单序号,OCount as 8 订单数量,SellID as 9 销货单号,SellCount as 10 销货数量,SRCount as 11 销退数量,SUnitPrice as 12 销售单价,DiscountRate as 13 折扣率,"
+            + "TaxRate as 14 税率,TotalCount as 15 金额,Tax as 16 税额,NoTax as 17 不含税额,TNTotalCount as 18 合计金额,TNTax as 19 合计税额,TNNoTax as 20 合计不含税金额,"
+            + "StorageType as 21 仓库类型,LocationName as 22 库位名称,ClientID as 23 客户编号,CName as 24 客户名称,Sale as 25 业务员,SellReDate as 26 销货日期,Maker as 27 制单人,"
+            + "Date as 28 制单日期,Time as 29 制单时间 from tb_SellRe";
